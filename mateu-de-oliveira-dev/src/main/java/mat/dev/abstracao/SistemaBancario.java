@@ -6,19 +6,19 @@ public class SistemaBancario {
 		
 		 /*Teste Git*/
 
-		Pg_Pix pix = new Pg_Pix(1000);
+			Pagamento pix = new Pg_Pix(1000);
 		
 		pix.EfetuarPagamento();
 		pix.confirmarPagamento();
 
 
-		Pg_Boleto boleto = new Pg_Boleto(5000);
+		Pagamento boleto = new Pg_Boleto(5000);
 
 		boleto.EfetuarPagamento();
 		boleto.confirmarPagamento();
 
 
-		Pg_Cartao cartao = new Pg_Cartao(2500);
+		Pagamento cartao = new Pg_Cartao(2500);
 
 		cartao.EfetuarPagamento();
 		cartao.confirmarPagamento();
