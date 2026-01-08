@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Pedido {
 
-	private String id;
-	private String status;
+	public String id;
+	public String status;
 
 	public Pedido(String id, String status) {
 		this.id = id;
