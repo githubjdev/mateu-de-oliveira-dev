@@ -32,6 +32,11 @@ public class Pedido {
 	public String toString() {
 		return "Pedido [id=" + id + ", status=" + status + "]";
 	}
+	
+	
+	public boolean concluido() {
+		return getStatus().equals("Concluido");
+	}
 
 	@Override
 	public int hashCode() {
