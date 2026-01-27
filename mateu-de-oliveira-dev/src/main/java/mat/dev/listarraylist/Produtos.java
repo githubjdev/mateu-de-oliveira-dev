@@ -7,6 +7,9 @@ public class Produtos {
 	private String nome;
 	private double preco;
 	private double estoque;
+	private boolean ativo;
+	private String marca;
+	private String categoria;
 
 	public Produtos(String nome, double preco, double estoque) {
 		super();
@@ -14,6 +17,16 @@ public class Produtos {
 		this.preco = preco;
 		this.estoque = estoque;
 
+	}
+
+	public Produtos(String nome, double preco, double estoque, boolean ativo, String marca, String categoria) {
+		super();
+		this.nome = nome;
+		this.preco = preco;
+		this.estoque = estoque;
+		this.ativo = ativo;
+		this.marca = marca;
+		this.categoria = categoria;
 	}
 
 	public String getNome() {
@@ -42,7 +55,8 @@ public class Produtos {
 
 	@Override
 	public String toString() {
-		return "Produtos [nome=" + nome + ", preco=" + preco + ", estoque=" + estoque + "]";
+		return "Produtos [nome=" + nome + ", preco=" + preco + ", estoque=" + estoque + ", ativo=" + ativo + ", marca="
+				+ marca + ", categoria=" + categoria + "]";
 	}
 
 	@Override
@@ -71,12 +85,12 @@ public class Produtos {
 	public void removerEstoque(double qtd) {
 		this.estoque -= qtd;
 	}
-	
+
 	public double desconto(int desconto) {
 		if (desconto <= 0 || desconto > 20) {
 			return this.preco;
 		}
 		return this.preco - ((desconto / 100.0) * this.preco);
 	}
-		
-	}
+
+}
