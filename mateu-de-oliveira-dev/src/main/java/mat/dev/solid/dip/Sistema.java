@@ -7,5 +7,10 @@ public class Sistema {
 	public Sistema(Banco banco) {
 		this.banco = banco;
 	}
+	
+	
+	public void conectar() {
+		this.banco.conectart();
+	}
 
 }
