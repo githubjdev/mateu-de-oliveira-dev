@@ -3,6 +3,13 @@ package mat.dev.encapsulamento;
 public class Produto {
 
 	private int estoque;
+	
+	
+	private String nome;
+	
+	public Produto(String nome) {
+		this.nome = nome;
+	}
 
 	public void adicionarEstoque(int quantidade) throws Exception {
 		if (quantidade <= 0) {
@@ -24,6 +31,11 @@ public class Produto {
 
 	public int getEstoque() {
 		return estoque;
+	}
+	
+	
+	public String getNome() {
+		return nome;
 	}
 
 }
