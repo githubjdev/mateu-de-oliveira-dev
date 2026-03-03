@@ -2,8 +2,8 @@ package mat.dev.reflection;
 
 public class Usuario {
 
-	Long id;
-	String nome;
+	private Long id;
+	private String nome = "user testes";
 
 	public Long getId() {
 		return id;
