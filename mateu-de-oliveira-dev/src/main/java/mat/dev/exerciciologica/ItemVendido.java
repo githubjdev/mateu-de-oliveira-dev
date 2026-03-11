@@ -2,12 +2,23 @@ package mat.dev.exerciciologica;
 
 import java.util.Objects;
 
-public class VendaItemProduto {
+/*Item que está sendo vendido*/
+public class ItemVendido {
 
 	private Long id;
 	private double quantidade; /* Duas cerveja */
 	private Produto produto;
-	private VendaCompra venda;
+	private Venda venda;
+	private String obs;
+	
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
+	
+	public String getObs() {
+		return obs;
+	}
+
 
 	public Long getId() {
 		return id;
@@ -33,11 +44,11 @@ public class VendaItemProduto {
 		this.produto = produto;
 	}
 
-	public VendaCompra getVenda() {
+	public Venda getVenda() {
 		return venda;
 	}
 
-	public void setVenda(VendaCompra venda) {
+	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
 
@@ -54,7 +65,7 @@ public class VendaItemProduto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VendaItemProduto other = (VendaItemProduto) obj;
+		ItemVendido other = (ItemVendido) obj;
 		return Objects.equals(id, other.id) && Objects.equals(produto, other.produto)
 				&& Double.doubleToLongBits(quantidade) == Double.doubleToLongBits(other.quantidade)
 				&& Objects.equals(venda, other.venda);

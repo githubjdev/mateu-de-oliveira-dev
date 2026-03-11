@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class VendaCompra {
+public class Venda {
 
 	private Long id;
 	private double total; /* Valor toral da venda */
@@ -12,20 +12,20 @@ public class VendaCompra {
 	private Pessoa pessoa;
 
 	// lista de item List
-	private List<VendaItemProduto> itens = new ArrayList<VendaItemProduto>();
+	private List<ItemVendido> itensVendidos = new ArrayList<ItemVendido>();
 
-	public void addProduto(VendaItemProduto produto) {
-		itens.add(produto);
+	public void addProduto(ItemVendido produto) {
+		itensVendidos.add(produto);
 	}
 
-	public void removerProduto(VendaItemProduto produto) {
-		itens.remove(produto);
+	public void removerProduto(ItemVendido produto) {
+		itensVendidos.remove(produto);
 	}
 
 	public double totalVenda() {
 
 		double total = 0;
-		for (VendaItemProduto produto : itens) {
+		for (ItemVendido produto : itensVendidos) {
 			total += produto.getProduto().getValor();
 		}
 
@@ -35,7 +35,7 @@ public class VendaCompra {
 	}
 
 	public int quantidadeItem() {
-		return itens.size();
+		return itensVendidos.size();
 	}
 
 	public Long getId() {
@@ -70,12 +70,12 @@ public class VendaCompra {
 		this.pessoa = pessoa;
 	}
 
-	public List<VendaItemProduto> getItens() {
-		return itens;
+	public List<ItemVendido> getItens() {
+		return itensVendidos;
 	}
 
-	public void setItens(List<VendaItemProduto> itens) {
-		this.itens = itens;
+	public void setItens(List<ItemVendido> itens) {
+		this.itensVendidos = itens;
 	}
 
 }
