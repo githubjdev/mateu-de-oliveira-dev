@@ -1,0 +1,49 @@
+
+
+
+
+
+
+(Classe )
+(Tabela no banco)
+
+-------------------------------------------------- 
+Banco (Objeto)
+
+Id
+Nome
+CNPJ
+Endereco
+Numero de registro 
+--------------------------------------------------
+
+
+Pessoa Cliente
+Id
+Nome
+RG
+CPF
+Telefone
+Endereco
+
+---------------------------------------------------
+
+Conta Corrente
+ID
+Numero
+Agencia
+Digito Verificar
+Banco
+Pessoa (Cliente)
+
+
+--------------------------------------
+ Transação
+ ID
+ Valor
+ Conta Corrente (Origem)
+ Conta Corrente (Destino)
+ Status
+ Data
+ 
+ --------------------------------------
