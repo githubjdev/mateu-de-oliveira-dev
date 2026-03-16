@@ -1,5 +1,7 @@
 package mat.dev.exerciciologica2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ContaCorrente {
@@ -10,6 +12,16 @@ public class ContaCorrente {
 	private String digitoVerificar;
 	private Banco banco;
 	private Pessoa pessoa;
+
+	private List<Transacao> transacaos = new ArrayList<Transacao>();
+
+	public void setTransacaos(List<Transacao> transacaos) {
+		this.transacaos = transacaos;
+	}
+
+	public List<Transacao> getTransacaos() {
+		return transacaos;
+	}
 
 	public Long getId() {
 		return id;
