@@ -12,6 +12,7 @@ public class ContaCorrente {
 	private String digitoVerificar;
 	private Banco banco;
 	private Pessoa pessoa;
+	private double saldo = 5000;
 
 	private List<Transacao> transacaos = new ArrayList<Transacao>();
 
@@ -69,6 +70,20 @@ public class ContaCorrente {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+
+
+	public void deposito(double valor) {
+		this.saldo += valor;
+	}
+
+	public void debito(double valor) {
+		this.saldo -= valor;
 	}
 
 	@Override
