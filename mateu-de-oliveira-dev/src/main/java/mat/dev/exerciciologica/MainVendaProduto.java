@@ -81,6 +81,5 @@ public class MainVendaProduto {
 		System.out.println("Total de Itens: " + venda.quantidadeItem());
 		
 
-""	}
-
+	}
 }

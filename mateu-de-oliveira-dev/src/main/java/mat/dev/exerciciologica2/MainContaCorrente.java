@@ -2,18 +2,19 @@ package mat.dev.exerciciologica2;
 
 import java.util.Calendar;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class MainContaCorrente {
-	
-	public static void main(String[] args) {
-		
-		
+
+	public static void main(String[] args) throws JsonProcessingException {
+
 		Banco banco = new Banco();
 		banco.setId(1l);
 		banco.setNome("Itau");
 		banco.setCnpj("218752000277");
 		banco.setEndereco("Rua logo ali");
 		banco.setNumeroRegistro("70090");
-		
 
 		Pessoa pessoaMateus = new Pessoa();
 		pessoaMateus.setId(1l);
@@ -36,7 +37,6 @@ public class MainContaCorrente {
 		transacao.setData(Calendar.getInstance().getTime());
 		transacao.setStatus("andemento");
 		transacao.setValor(1000);
-
 
 		ContaCorrente contaCorrenteOrigem = new ContaCorrente();
 		contaCorrenteOrigem.setId(1l);
@@ -62,9 +62,25 @@ public class MainContaCorrente {
 
 		transacao.setContaCorrenteDestino(contaCorrenteDestino);
 
-
 		System.out.println("saldo da conta origem " + contaCorrenteOrigem.getSaldo());
 		System.out.println("saldo da conta destino " + contaCorrenteDestino.getSaldo());
+
+		
+		
+		ObjectMapper mapper = new ObjectMapper();
+
+		/*Json Transação*/
+		String jsonTransacao = mapper.writeValueAsString(transacao);
+		System.out.println("Transação: " + jsonTransacao);
+
+		/*Json Conta corrente origem*/
+		String jsonContaCorrenteOrigem = mapper.writeValueAsString(contaCorrenteOrigem);
+		System.out.println("Origem: " + jsonContaCorrenteOrigem);
+
+		/*Json Conta corrente destino*/
+		String jsonContaCorrenteDestino = mapper.writeValueAsString(contaCorrenteDestino);
+		System.out.println("Desinto: " + jsonContaCorrenteDestino);
+
 	}
 
 }

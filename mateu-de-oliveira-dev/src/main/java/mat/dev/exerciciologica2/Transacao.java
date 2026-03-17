@@ -3,11 +3,17 @@ package mat.dev.exerciciologica2;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Transacao {
 
 	private Long id;
 	private double valor;
+
+	@JsonIgnore
 	private ContaCorrente contaCorrenteOrigem;
+
+	@JsonIgnore
 	private ContaCorrente contaCorrenteDestino;
 	private String status;
 	private Date data;
