@@ -22,6 +22,7 @@
 
 
 	<dependencies>
+
 		<!-- Spring Boot Web (para usar CommandLineRunner e logs HTTP se
 		precisar) -->
 		<dependency>
@@ -63,6 +64,16 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Source:
+		https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>7.0.6</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
