@@ -1,12 +1,15 @@
 package mat.dev.sprinboot.entidades;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity // Se torna uma tabela no banco no banco de dados
 public class Produto {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String nome;
