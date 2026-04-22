@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity // Se torna uma tabela no banco no banco de dados
 public class Produto {
@@ -48,6 +49,16 @@ public class Produto {
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	@Transient /*Para não criar colun ana tabela*/
+	public boolean qtdValida() {
+		return quantidade > 0;
+	}
+
+	@Transient /*Para não criar colun ana tabela*/
+	public boolean precoValido() {
+		return preco > 0;
 	}
 
 }
