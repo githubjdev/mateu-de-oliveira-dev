@@ -116,6 +116,13 @@ public class ProdutoController {
 		
 	}
 	
+	@GetMapping("buscarPorNome/{nome}")
+	public ResponseEntity<List<Produto>> buscarPorNome(@PathVariable(name = "nome") String nome){
+		 List<Produto> produtos = produtoService.buscarPorNome(nome);
+		
+		return ResponseEntity.ok(produtos);
+	}
+	
 	
 
 }
