@@ -25,12 +25,12 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 
-	@GetMapping("/teste")
+	@GetMapping(value = "/teste", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> teste() {
 		return ResponseEntity.ok("End-point funcinando");
 	}
 
-	@PostMapping("/salvar")
+	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Produto> salvar(@RequestBody Produto produto) throws Exception {
 
 		if (!produto.qtdValida()) {
@@ -45,16 +45,15 @@ public class ProdutoController {
 		return ResponseEntity.ok(prodSaldo);
 	}
 
-	@PutMapping("/update")
+	@PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Produto> update(@RequestBody Produto produto) throws Exception {
 
 		Optional<Produto> optional = produtoService.existe(produto.getId());
-	
+
 		if (!optional.isPresent()) {
 			throw new Exception("Produto com ID " + produto.getId() + " não encontrado para atualizar");
 		}
-		
-		
+
 		if (!produto.qtdValida()) {
 			throw new Exception("Quantidade de estoque é inválida.");
 		}
@@ -62,7 +61,6 @@ public class ProdutoController {
 		if (!produto.precoValido()) {
 			throw new Exception("Preço do produto é inválida.");
 		}
-		
 
 		Produto prodSaldo = produtoService.salvar(produto);
 		return ResponseEntity.ok(prodSaldo);
@@ -73,57 +71,54 @@ public class ProdutoController {
 
 		return ResponseEntity.ok(produtoService.lista());
 	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Produto> buscarId(@PathVariable(name = "id") Long id) throws Exception{
-		
-		if (id <= 0) { /*Valida se  o ID é maior que zero*/
+
+	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Produto> buscarId(@PathVariable(name = "id") Long id) throws Exception {
+
+		if (id <= 0) { /* Valida se o ID é maior que zero */
 			return ResponseEntity.badRequest().build();
 		}
-		
-		/*Consulta pra saber se o objeto existe no banco de dados*/
+
+		/* Consulta pra saber se o objeto existe no banco de dados */
 		Optional<Produto> optional = produtoService.existe(id);
-		
-		/*Caso não exista dê msg de erro*/
+
+		/* Caso não exista dê msg de erro */
 		if (!optional.isPresent()) {
 			throw new Exception("Produto com ID " + id + " não encontrado para atualizar");
 		}
-		
-		/*Caso esteja salvo no banco de dados, então mostra na tela*/
+
+		/* Caso esteja salvo no banco de dados, então mostra na tela */
 		return ResponseEntity.ok(optional.get());
-		
+
 	}
-	
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity deleteId(@PathVariable(name = "id") Long id) throws Exception{
-		
-		if (id <= 0) { /*Valida se  o ID é maior que zero*/
+
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity deleteId(@PathVariable(name = "id") Long id) throws Exception {
+
+		if (id <= 0) { /* Valida se o ID é maior que zero */
 			return ResponseEntity.badRequest().build();
 		}
-		
-		/*Consulta pra saber se o objeto existe no banco de dados*/
+
+		/* Consulta pra saber se o objeto existe no banco de dados */
 		Optional<Produto> optional = produtoService.existe(id);
-		
-		/*Caso não exista dê msg de erro*/
+
+		/* Caso não exista dê msg de erro */
 		if (!optional.isPresent()) {
 			throw new Exception("Produto com ID " + id + " não encontrado para deletar");
 		}
-		
+
 		produtoService.deletar(id);
-		
-		/*Caso esteja salvo no banco de dados, então mostra na tela*/
+
+		/* Caso esteja salvo no banco de dados, então mostra na tela */
 		return ResponseEntity.ok().build();
-		
+
 	}
-	
-	@GetMapping("buscarPorNome/{nome}")
-	public ResponseEntity<List<Produto>> buscarPorNome(@PathVariable(name = "nome") String nome){
-		 List<Produto> produtos = produtoService.buscarPorNome(nome);
-		
+
+	@GetMapping(value = "buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Produto>> buscarPorNome(@PathVariable(name = "nome") String nome) {
+		List<Produto> produtos = produtoService.buscarPorNome(nome);
+
 		return ResponseEntity.ok(produtos);
 	}
-	
-	
 
 }
