@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mat.dev.sprinboot.entidades.Produto;
+import mat.dev.sprinboot.exception.MsgApiException;
 import mat.dev.sprinboot.servicos.ProdutoService;
 
 @RestController
@@ -34,20 +35,20 @@ public class ProdutoController {
 	
 	
 	@PostMapping(value = "/salvarList", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Produto>> salvarList(@RequestBody List<Produto> produto) throws Exception {
+	public ResponseEntity<List<Produto>> salvarList(@RequestBody List<Produto> produto) throws MsgApiException {
 		List<Produto> prodSaldo = produtoService.salvarList(produto);
 		return ResponseEntity.ok(prodSaldo);
 	}
 
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Produto> salvar(@RequestBody Produto produto) throws Exception {
+	public ResponseEntity<Produto> salvar(@RequestBody Produto produto) throws MsgApiException {
 
 		if (!produto.qtdValida()) {
-			throw new Exception("Quantidade de estoque é inválida.");
+			throw new MsgApiException("Quantidade de estoque é inválida.");
 		}
 
 		if (!produto.precoValido()) {
-			throw new Exception("Preço do produto é inválida.");
+			throw new MsgApiException("Preço do produto é inválida.");
 		}
 
 		Produto prodSaldo = produtoService.salvar(produto);
@@ -55,20 +56,20 @@ public class ProdutoController {
 	}
 
 	@PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Produto> update(@RequestBody Produto produto) throws Exception {
+	public ResponseEntity<Produto> update(@RequestBody Produto produto) throws MsgApiException {
 
 		Optional<Produto> optional = produtoService.existe(produto.getId());
 
 		if (!optional.isPresent()) {
-			throw new Exception("Produto com ID " + produto.getId() + " não encontrado para atualizar");
+			throw new MsgApiException("Produto com ID " + produto.getId() + " não encontrado para atualizar");
 		}
 
 		if (!produto.qtdValida()) {
-			throw new Exception("Quantidade de estoque é inválida.");
+			throw new MsgApiException("Quantidade de estoque é inválida.");
 		}
 
 		if (!produto.precoValido()) {
-			throw new Exception("Preço do produto é inválida.");
+			throw new MsgApiException("Preço do produto é inválida.");
 		}
 
 		Produto prodSaldo = produtoService.salvar(produto);
@@ -82,10 +83,10 @@ public class ProdutoController {
 	}
 
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Produto> buscarId(@PathVariable(name = "id") Long id) throws Exception {
+	public ResponseEntity<Produto> buscarId(@PathVariable(name = "id") Long id) throws MsgApiException {
 
 		if (id <= 0) { /* Valida se o ID é maior que zero */
-			return ResponseEntity.badRequest().build();
+			throw new MsgApiException("Produto não encontrado com ID: " + id);
 		}
 
 		/* Consulta pra saber se o objeto existe no banco de dados */
@@ -93,7 +94,7 @@ public class ProdutoController {
 
 		/* Caso não exista dê msg de erro */
 		if (!optional.isPresent()) {
-			throw new Exception("Produto com ID " + id + " não encontrado para atualizar");
+			throw new MsgApiException("Produto com ID " + id + " não encontrado busca");
 		}
 
 		/* Caso esteja salvo no banco de dados, então mostra na tela */
@@ -102,7 +103,7 @@ public class ProdutoController {
 	}
 
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity deleteId(@PathVariable(name = "id") Long id) throws Exception {
+	public ResponseEntity deleteId(@PathVariable(name = "id") Long id) throws MsgApiException {
 
 		if (id <= 0) { /* Valida se o ID é maior que zero */
 			return ResponseEntity.badRequest().build();
@@ -113,7 +114,7 @@ public class ProdutoController {
 
 		/* Caso não exista dê msg de erro */
 		if (!optional.isPresent()) {
-			throw new Exception("Produto com ID " + id + " não encontrado para deletar");
+			throw new MsgApiException("Produto com ID " + id + " não encontrado para deletar");
 		}
 
 		produtoService.deletar(id);
