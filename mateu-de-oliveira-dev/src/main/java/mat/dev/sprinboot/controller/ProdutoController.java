@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import mat.dev.sprinboot.dto.ProdutoDTO;
 import mat.dev.sprinboot.entidades.Produto;
 import mat.dev.sprinboot.exception.MsgApiException;
 import mat.dev.sprinboot.servicos.ProdutoService;
@@ -28,6 +30,7 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 
+	//@RequestMapping(method = RequestMethod.GET, value = "/teste")
 	@GetMapping(value = "/teste", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> teste() {
 		return ResponseEntity.ok("End-point funcinando");
@@ -53,6 +56,21 @@ public class ProdutoController {
 
 		Produto prodSaldo = produtoService.salvar(produto);
 		return ResponseEntity.ok(prodSaldo);
+	}
+	
+	@PostMapping(value = "/adicionarEstoque", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> adicionarEstoque(@RequestBody ProdutoDTO produtoDTO){
+		
+		produtoService.adicionarEstoque(produtoDTO);
+		return ResponseEntity.ok("Estoque atualizado com sucesso!");
+	}
+	
+	
+	@PostMapping(value = "/removerEstoque", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> removerEstoque(@RequestBody ProdutoDTO produtoDTO){
+		
+		produtoService.removerEstoque(produtoDTO);
+		return ResponseEntity.ok("Estoque atualizado com sucesso!");
 	}
 
 	@PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -139,5 +157,8 @@ public class ProdutoController {
 		Page<Produto> pagina = produtoService.listaPaginada(page, size);
 		return ResponseEntity.ok(pagina.getContent());
 	}
+	
+	
+	
 
 }

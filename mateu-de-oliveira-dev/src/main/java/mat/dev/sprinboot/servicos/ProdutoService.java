@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import mat.dev.sprinboot.dto.ProdutoDTO;
 import mat.dev.sprinboot.entidades.Produto;
 import mat.dev.sprinboot.repository.ProdutoRepository;
 
@@ -44,6 +45,14 @@ public class ProdutoService {
 
 	public Page<Produto> listaPaginada(int page, int size) {
 		return produtoRepository.findAll(PageRequest.of(page, size, Sort.by("nome")));
+	}
+
+	public void adicionarEstoque(ProdutoDTO produtoDTO) {
+		produtoRepository.adicionarEstoque(produtoDTO.getId(), produtoDTO.getQuantidade());
+	}
+	
+	public void removerEstoque(ProdutoDTO produtoDTO) {
+		produtoRepository.removerEstoque(produtoDTO.getId(), produtoDTO.getQuantidade());
 	}
 
 }

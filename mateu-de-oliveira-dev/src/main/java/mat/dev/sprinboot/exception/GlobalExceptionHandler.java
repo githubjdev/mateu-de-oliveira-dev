@@ -15,6 +15,8 @@ public class GlobalExceptionHandler {
 	/* Para erro que não estamos esperando RuntimeException*/
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<String> erroGeralRuntime(RuntimeException ex) {
+		
+		ex.printStackTrace();
 
 		return ResponseEntity.internalServerError()
 				               .contentType(MediaType.APPLICATION_JSON)
@@ -24,6 +26,8 @@ public class GlobalExceptionHandler {
 	/* Para erro que não estamos esperando Exception*/
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> erroGeralException(Exception ex) {
+		
+		ex.printStackTrace();
 
 		return ResponseEntity.internalServerError().
 				             contentType(MediaType.APPLICATION_JSON)
@@ -35,6 +39,8 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(MsgApiException.class)
 	public ResponseEntity<ResponseApi> erroGeralMsgApiException(MsgApiException ex, 
 			                                                   HttpServletRequest request) {
+		
+		ex.printStackTrace();
 		
 		ResponseApi responseApi = new ResponseApi(LocalDateTime.now(),
 				                ex.getStatus().value(),
