@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import mat.dev.sprinboot.dto.ProdutoDTO;
 import mat.dev.sprinboot.entidades.Produto;
+import mat.dev.sprinboot.exception.MsgApiException;
 import mat.dev.sprinboot.repository.ProdutoRepository;
 
 @Service
@@ -24,6 +25,11 @@ public class ProdutoService {
 	}
 
 	public Produto salvar(Produto produto) {
+		
+		if (produto.getCategoria() == null) {
+			throw new MsgApiException("Categoria deve ser informado para cadastrar um produto.");
+		}
+		
 		return produtoRepository.saveAndFlush(produto);
 	}
 	
