@@ -11,12 +11,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "categoria")
+@SequenceGenerator(name = "seq_categoria",
+                   sequenceName = "seq_categoria",
+                   allocationSize = 1,
+                   initialValue = 1)
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria")
 	private Long id;
 
 	@Column(unique = true)
