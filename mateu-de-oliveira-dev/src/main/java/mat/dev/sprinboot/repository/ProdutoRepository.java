@@ -16,6 +16,10 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	@Query("select p from Produto p where lower(p.nome) like %:nome%")
 	List<Produto> buscarPorNome(@Param("nome") String nome);
+	
+	@Query("select p from Produto p where p.categoria.id = :idCategoria")
+	List<Produto> buscarPorCategoria(@Param("idCategoria") Long idCategoria);
+	
 
 	@Transactional
 	@Modifying /*tem que ter @Modifying para update e delete */

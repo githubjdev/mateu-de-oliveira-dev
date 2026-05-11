@@ -147,6 +147,14 @@ public class ProdutoController {
 		return ResponseEntity.ok(produtos);
 	}
 	
+
+	@GetMapping(value = "buscarPorCategoria/{idCategoria}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Produto>> buscarPorCategoria(@PathVariable(name = "idCategoria") Long idCategoria) {
+		List<Produto> produtos = produtoService.buscarPorCategoria(idCategoria);
+		return ResponseEntity.ok(produtos);
+	}
+	
+	
 	
 	@GetMapping("/listaPaginada")
 	public ResponseEntity<List<Produto>> listaPaginada(@RequestParam(defaultValue = "0") int page,

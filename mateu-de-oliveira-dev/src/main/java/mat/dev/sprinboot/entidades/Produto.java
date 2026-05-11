@@ -1,5 +1,7 @@
 package mat.dev.sprinboot.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -36,6 +38,7 @@ public class Produto {
 	@JoinColumn(name = "categoria_id", 
 			    nullable = false, 
 			    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "categoria_fk" ))
+	@JsonIgnoreProperties
 	@ManyToOne
 	private Categoria categoria;
 	

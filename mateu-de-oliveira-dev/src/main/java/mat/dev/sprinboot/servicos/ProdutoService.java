@@ -48,6 +48,11 @@ public class ProdutoService {
 	public List<Produto> buscarPorNome(String nome) {
 		return produtoRepository.buscarPorNome(nome.toLowerCase());
 	}
+	
+	
+	public List<Produto> buscarPorCategoria(Long idCategoria) {
+		return produtoRepository.buscarPorCategoria(idCategoria);
+	}
 
 	public Page<Produto> listaPaginada(int page, int size) {
 		return produtoRepository.findAll(PageRequest.of(page, size, Sort.by("nome")));
