@@ -1,5 +1,6 @@
 package mat.dev.sprinboot.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,13 @@ public class CategoriaService {
 		categoriaRepository.deleteById(id);
 	}
 
+	@SuppressWarnings("unused")
 	public List<Categoria> buscarPorNome(String nome) {
+		
+		if (nome == null && (nome!= null && nome.isEmpty())) {
+			return new ArrayList<Categoria>();
+		}
+		
 		return categoriaRepository.buscarPorNome(nome.toLowerCase());
 	}
 

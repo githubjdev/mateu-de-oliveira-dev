@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import mat.dev.sprinboot.dto.ProdutoDTO;
 import mat.dev.sprinboot.entidades.Produto;
 import mat.dev.sprinboot.exception.MsgApiException;
@@ -42,7 +43,7 @@ public class ProdutoController {
 	}
 
 	@PostMapping(value = "/salvar", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Produto> salvar(@RequestBody Produto produto) throws MsgApiException {
+	public ResponseEntity<Produto> salvar(@RequestBody @Valid Produto produto) throws MsgApiException {
 
 		if (!produto.qtdValida()) {
 			throw new MsgApiException("Quantidade de estoque é inválida.");

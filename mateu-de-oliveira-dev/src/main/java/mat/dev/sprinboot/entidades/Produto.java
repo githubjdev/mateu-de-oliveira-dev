@@ -14,6 +14,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity // Se torna uma tabela no banco no banco de dados
 @Table(name = "produto")
@@ -27,11 +31,16 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
 	private Long id;
 
+	@NotBlank(message = "Nome não pode ser null ou vazio")
 	@Column(unique = true)
 	private String nome;
 
+	@Positive(message = "Valor do produto deve ser mairo que zero")
 	private Double preco;
 
+	@Min(message = "Estoque minimo deve ser 5 unidades", value = 5)
+	@Max(message = "Estoque máximo é de 500", value = 500)
+	@Positive(message = "Quantidade de estoque deve ser maior que zero")
 	private Integer quantidade;
 	
 	/*Muitos produto para uma categoria*/
