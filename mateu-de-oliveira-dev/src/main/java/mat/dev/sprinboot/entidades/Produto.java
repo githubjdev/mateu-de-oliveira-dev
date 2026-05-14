@@ -35,7 +35,7 @@ public class Produto {
 	@Column(unique = true)
 	private String nome;
 
-	@Positive(message = "Valor do produto deve ser mairo que zero")
+	@Positive(message = "Valor do produto deve ser maioo que zero")
 	private Double preco;
 
 	@Min(message = "Estoque minimo deve ser 5 unidades", value = 5)

@@ -1,9 +1,13 @@
 package mat.dev.sprinboot.exception;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -32,6 +36,20 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.internalServerError().
 				             contentType(MediaType.APPLICATION_JSON)
 				             .body(ex.getMessage());
+	}
+	
+	
+	/* Captura erro do Bean Validator */
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<Object> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+
+		List<String> lista = new ArrayList<String>();
+
+		for (ObjectError erro : ex.getAllErrors()) {
+			lista.add(erro.getDefaultMessage());
+		}
+
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	
