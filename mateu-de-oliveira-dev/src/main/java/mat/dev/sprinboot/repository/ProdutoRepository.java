@@ -14,19 +14,26 @@ import mat.dev.sprinboot.entidades.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
+	
+	/*Buscar produto pelo nome*/
+	
 	@Query("select p from Produto p where lower(p.nome) like %:nome%")
 	List<Produto> buscarPorNome(@Param("nome") String nome);
 	
+	
+	/*busca produto pela sua categoria*/
 	@Query("select p from Produto p where p.categoria.id = :idCategoria")
 	List<Produto> buscarPorCategoria(@Param("idCategoria") Long idCategoria);
 	
 
+	/*Adiciona estoque atualiazando a quantidade*/
 	@Transactional
 	@Modifying /*tem que ter @Modifying para update e delete */
 	@Query("update Produto set quantidade = quantidade + :quantidade where id = :id")
 	void adicionarEstoque(@Param("id") Long id, @Param("quantidade") Integer quantidade);
 	
 
+	/*Remove estoque atualizando a quantidade*/
 	@Transactional
 	@Modifying /*tem que ter @Modifying para update e delete */
 	@Query("update Produto set quantidade = quantidade - :quantidade where id = :id")
