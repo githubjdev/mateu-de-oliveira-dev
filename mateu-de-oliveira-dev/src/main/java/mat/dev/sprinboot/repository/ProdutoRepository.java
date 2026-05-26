@@ -17,7 +17,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 	
 	/*Buscar produto pelo nome*/
 	
-	@Query("select p from Produto p where lower(p.nome) like %:nome%")
+
+	@Query("select p from Produto p where lower(p.nome) like concat('%', lower(:nome), '%')")
 	List<Produto> buscarPorNome(@Param("nome") String nome);
 	
 	
