@@ -29,14 +29,14 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	/*Adiciona estoque atualiazando a quantidade*/
 	@Transactional
-	@Modifying /*tem que ter @Modifying para update e delete */
+	@Modifying(flushAutomatically = true, clearAutomatically = true) /*tem que ter @Modifying para update e delete */
 	@Query("update Produto set quantidade = quantidade + :quantidade where id = :id")
 	void adicionarEstoque(@Param("id") Long id, @Param("quantidade") Integer quantidade);
 	
 
 	/*Remove estoque atualizando a quantidade*/
 	@Transactional
-	@Modifying /*tem que ter @Modifying para update e delete */
+	@Modifying(flushAutomatically = true, clearAutomatically = true) /*tem que ter @Modifying para update e delete */
 	@Query("update Produto set quantidade = quantidade - :quantidade where id = :id")
 	void removerEstoque(@Param("id") Long id, @Param("quantidade") Integer quantidade);
 

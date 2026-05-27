@@ -17,6 +17,7 @@ import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Entity // Se torna uma tabela no banco no banco de dados
@@ -44,6 +45,7 @@ public class Produto {
 	private Integer quantidade;
 	
 	/*Muitos produto para uma categoria*/
+	@NotNull(message = "Categoria deve ser informada")
 	@JoinColumn(name = "categoria_id", 
 			    nullable = false, 
 			    foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "categoria_fk" ))

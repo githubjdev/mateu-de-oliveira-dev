@@ -1,5 +1,6 @@
 package contexto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ public class TestContextoSpring {
 	
 	
 	@Test
+	@DisplayName("Teste inicial de funcionamento")
 	public void teste () {
 		System.out.println("Teste funcionando....");
 	}
