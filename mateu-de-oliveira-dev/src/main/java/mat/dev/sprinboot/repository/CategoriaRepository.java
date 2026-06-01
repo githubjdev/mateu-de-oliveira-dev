@@ -12,7 +12,9 @@ import mat.dev.sprinboot.entidades.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-	@Query("select p from Categoria p where lower(p.nome) like %:nome%")
+	
+	
+	@Query("select p from Categoria p where lower(p.nome) like concat('%', lower(:nome), '%')")
 	List<Categoria> buscarPorNome(@Param("nome") String nome);
 
 }

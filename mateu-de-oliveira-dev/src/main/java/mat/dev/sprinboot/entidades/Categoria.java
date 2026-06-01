@@ -15,6 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "categoria")
@@ -28,6 +30,8 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria")
 	private Long id;
 
+	@NotNull(message = "Nome da categoria deve ser infromada")
+	@NotBlank(message = "Nome da categroia deve ser informada")
 	@Column(unique = true)
 	private String nome;
 	
