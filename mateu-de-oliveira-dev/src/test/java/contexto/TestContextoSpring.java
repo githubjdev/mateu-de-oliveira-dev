@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import mat.dev.sprinboot.app.SpringBootRunApp;
 
 @Profile("dev") /*Perfil de desenvolvimento*/
-@AutoConfigureMockMvc /*COnfiguraão automatica do spring*/
+@AutoConfigureMockMvc(addFilters = false) /*COnfiguraão automatica do spring*/
 @TestPropertySource(locations = "classpath:application-dev.properties")
 @SpringBootTest(classes = SpringBootRunApp.class)
 @Transactional

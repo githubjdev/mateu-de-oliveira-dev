@@ -157,7 +157,7 @@ public class ProdutoController {
 	
 	
 	
-	@GetMapping("/listaPaginada")
+	@GetMapping(value = "/listaPaginada", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Produto>> listaPaginada(@RequestParam(defaultValue = "0") int page,
 													   @RequestParam(defaultValue = "10") int size) {
 

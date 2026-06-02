@@ -118,7 +118,7 @@ public class CategoriaController {
 	}
 	
 	
-	@GetMapping("/listaPaginada")
+	@GetMapping(value = "/listaPaginada", produces = "application/json;charset=UTF-8")
 	public ResponseEntity<List<Categoria>> listaPaginada(@RequestParam(defaultValue = "0") int page,
 													   @RequestParam(defaultValue = "10") int size) {
 
