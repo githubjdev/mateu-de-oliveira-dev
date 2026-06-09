@@ -10,7 +10,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import mat.dev.sprinboot.dto.CategoriaDTO;
+import mat.dev.sprinboot.dto.ProdutoDTO;
 import mat.dev.sprinboot.entidades.Categoria;
+import mat.dev.sprinboot.entidades.Produto;
 import mat.dev.sprinboot.exception.MsgApiException;
 import mat.dev.sprinboot.repository.CategoriaRepository;
 
@@ -53,6 +56,37 @@ public class CategoriaService {
 		}
 		
 		return categoriaRepository.buscarPorNome(nome.toLowerCase());
+	}
+	
+	
+	@SuppressWarnings("unused")
+	public List<CategoriaDTO> buscarPorNomeProd(String nome) {
+
+		List<CategoriaDTO> categoriaDTOs = new ArrayList<CategoriaDTO>();
+
+		if (nome == null && (nome != null && nome.isEmpty())) {
+			return new ArrayList<CategoriaDTO>();
+		}
+
+		List<Categoria> categorias = categoriaRepository.buscarPorNome(nome.toLowerCase());
+
+		for (Categoria categoria : categorias) {
+			CategoriaDTO categoriaDTO = new CategoriaDTO();
+			categoriaDTO.setNome(categoria.getNome());
+
+			for (Produto produto : categoria.getProdutos()) {
+				ProdutoDTO produtoDTO = new ProdutoDTO();
+				produtoDTO.setNome(produto.getNome());
+				produtoDTO.setNomeCategoria(categoria.getNome());
+				produtoDTO.setPreco(produto.getPreco());
+				produtoDTO.setQuantidade(produto.getQuantidade());
+				categoriaDTO.getProdutoDTOs().add(produtoDTO);
+			}
+
+			categoriaDTOs.add(categoriaDTO);
+		}
+
+		return categoriaDTOs;
 	}
 
 	public Page<Categoria> listaPaginada(int page, int size) {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import mat.dev.sprinboot.dto.CategoriaDTO;
 import mat.dev.sprinboot.entidades.Categoria;
 import mat.dev.sprinboot.exception.MsgApiException;
 import mat.dev.sprinboot.servicos.CategoriaService;
@@ -113,6 +114,15 @@ public class CategoriaController {
 	@GetMapping(value = "buscarPorNome/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Categoria>> buscarPorNome(@PathVariable(name = "nome") String nome) {
 		List<Categoria> categorias = categoriaService.buscarPorNome(nome);
+
+		return ResponseEntity.ok(categorias);
+	}
+	
+	
+
+	@GetMapping(value = "buscarPorNomeProd/{nome}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CategoriaDTO>> buscarPorNomeProd(@PathVariable(name = "nome") String nome) {
+		List<CategoriaDTO> categorias = categoriaService.buscarPorNomeProd(nome);
 
 		return ResponseEntity.ok(categorias);
 	}

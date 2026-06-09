@@ -6,13 +6,31 @@ package mat.dev.sprinboot.dto;
 public class ProdutoDTO {
 
 	private Long id;
+	private String nome;
 	private Integer quantidade;
+	private Double preco;
 	private String nomeCategoria;
-	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
 	public void setNomeCategoria(String nomeCategoria) {
 		this.nomeCategoria = nomeCategoria;
 	}
-	
+
 	public String getNomeCategoria() {
 		return nomeCategoria;
 	}
