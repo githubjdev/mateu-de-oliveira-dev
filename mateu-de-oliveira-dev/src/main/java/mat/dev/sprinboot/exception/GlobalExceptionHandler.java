@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.postgresql.util.PSQLException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -19,6 +20,19 @@ public class GlobalExceptionHandler {
 	/* Para erro que não estamos esperando RuntimeException*/
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<String> erroGeralRuntime(RuntimeException ex) {
+		
+		ex.printStackTrace();
+
+		return ResponseEntity.internalServerError()
+				               .contentType(MediaType.APPLICATION_JSON)
+				               .body(ex.getMessage());
+	}
+	
+	
+
+	/* Para erro que não estamos esperando RuntimeException*/
+	@ExceptionHandler(PSQLException.class)
+	public ResponseEntity<String> erroGeralPsql(PSQLException ex) {
 		
 		ex.printStackTrace();
 
